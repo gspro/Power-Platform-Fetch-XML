@@ -1,0 +1,27 @@
+<fetch distinct="true" >
+  <entity name="statusmap" >
+    <attribute name="statusmapid" />
+    <attribute name="objecttypecode" />
+    <attribute name="state" />
+    <attribute name="status" />
+    <link-entity name="stringmap" from="attributevalue" to="state" link-type="inner" alias="state" >
+      <attribute name="value" />
+      <filter type="and" >
+        <condition attribute="langid" operator="eq" value="1033" />
+        <condition attribute="attributename" operator="eq" value="statecode" />
+      </filter>
+    </link-entity>
+    <link-entity name="stringmap" from="attributevalue" to="status" link-type="inner" alias="status" >
+      <attribute name="value" />
+      <filter type="and" >
+        <condition attribute="langid" operator="eq" value="1033" />
+        <condition attribute="attributename" operator="eq" value="statuscode" />
+      </filter>
+    </link-entity>
+    <filter type="and" >
+      <condition attribute="objecttypecode" operator="eq" value="1088" />
+      <condition entityname="state" attribute="objecttypecode" operator="eq" value="1088" />
+      <condition entityname="status" attribute="objecttypecode" operator="eq" value="1088" />
+    </filter>
+  </entity>
+</fetch>
